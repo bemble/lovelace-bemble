@@ -1,8 +1,6 @@
 name: Build
 on:
-  push:
-    branches:
-      - "main"
+  pull_request:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,11 +11,3 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          draft: true
-          generate_release_notes: true
-          files: dist/*.js
-          name: latest
-          tag_name: latest
