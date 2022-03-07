@@ -23,12 +23,11 @@ const build = async () => {
     svgs.forEach(svgFileName => {
         const svgContent = fs.readFileSync(svgFileName, {encoding: 'utf-8'});
         const svgJson = parse(svgContent);
-        const iconPath = getPathData(svgJson);
 
         const extension = path.extname(svgFileName);
         const iconName = path.basename(svgFileName, extension);
 
-        iconMap[iconName] = iconPath.toUpperCase();
+        iconMap[iconName] = getPathData(svgJson);
     });
 
     return `const ICON_MAP = ${JSON.stringify(iconMap, null, 4)};
